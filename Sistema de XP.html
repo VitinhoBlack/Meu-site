@@ -1,0 +1,34 @@
+HTML
+
+<html>
+<body>
+
+<h1>Meu Sistema de XP</h1>
+
+<p>Level: <span id="level">1</span></p>
+<p>XP: <span id="xp">0</span></p>
+
+<button
+onclick="ganharXP()">Treinei</button>
+
+<script>
+let xp = 0;
+let level = 1;
+
+function ganharXP() {
+    xp = xp + 10;
+
+if (xp >= 100) {
+xp = 0;
+level = level + 1;
+alert("Subiu de nível!");
+}
+document.getElementById("xp").innerText = xp;
+
+document.getElementById("level").innerText = level;
+
+}
+</script>
+
+</body>
+</html>

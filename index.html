@@ -1,33 +1,119 @@
-HTML
-
 <html>
+<head>
+
+<style>
+/* ===== FUNDO ESPACIAL ===== */
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: Arial;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+    background: black;
+}
+
+/* estrelas animadas */
+.stars {
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: moveStars 60s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes moveStars {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-500px, -500px); }
+}
+
+/* ===== CONTEÚDO ===== */
+.container {
+    position: relative;
+    z-index: 2;
+    padding-top: 50px;
+}
+
+/* ===== BOTÕES ===== */
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background: #1f1f3a;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3a3a6a;
+}
+</style>
+
+</head>
+
 <body>
+
+<!-- ===== FUNDO ===== -->
+<div class="stars"></div>
+
+<!-- ===== TELA PRINCIPAL ===== -->
+<div class="container">
 
 <h1>Meu Sistema de XP</h1>
 
 <p>Level: <span id="level">1</span></p>
 <p>XP: <span id="xp">0</span></p>
 
-<button
-onclick="ganharXP()">Treinei</button>
+<button onclick="perderXP()">Comi besteira</button>
+<button onclick="ganharXP()">Treinei</button>
 
+</div>
+
+<!-- ===== LÓGICA DO JOGO ===== -->
 <script>
+
 let xp = 0;
 let level = 1;
 
+/* ===== PERDER XP ===== */
+function perderXP() {
+    xp = xp - 5;
+
+    if (xp < 0) {
+        if (level > 1) {
+            level = level - 1;
+            xp = 95;
+            alert("Desceu de nível");
+        } else {
+            xp = 0;
+        }
+    }
+
+    atualizarTela();
+}
+
+/* ===== GANHAR XP ===== */
 function ganharXP() {
     xp = xp + 10;
 
-if (xp >= 100) {
-xp = 0;
-level = level + 1;
-alert("Subiu de nível!");
-}
-document.getElementById("xp").innerText = xp;
+    if (xp >= 100) {
+        xp = xp - 100;
+        level = level + 1;
+        alert("Subiu de nível!");
+    }
 
-document.getElementById("level").innerText = level;
-
+    atualizarTela();
 }
+
+/* ===== ATUALIZAR TELA ===== */
+function atualizarTela() {
+    document.getElementById("xp").innerText = xp;
+    document.getElementById("level").innerText = level;
+}
+
 </script>
 
 </body>
